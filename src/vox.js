@@ -632,6 +632,7 @@ function playWord(word) {
     };
     audio.onerror = (err) => {
       console.error(err);
+      document.body.removeChild(audio);
       resolve();
     };
 
