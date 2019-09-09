@@ -645,6 +645,8 @@ const vox = {
     playWord(word);
   },
   async playSentence(words) {
+    // False positive in eslint rule???
+    // eslint-disable-next-line no-unused-vars
     for (let word of words) {
       await playWord(word);
     }
