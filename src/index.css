@@ -1,10 +1,8 @@
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  min-height: 100vh;
+  margin: 0;
 }
 
 * {
@@ -14,16 +12,9 @@ body {
 #root {
   display: flex;
   flex-direction: column;
-}
-
-.tag-input-wrapper {
-  border: 1px solid rgb(103, 103, 103);
-}
-
-.tag-input-wrapper.focused {
-  outline-offset: -2px;
-  outline: rgb(65, 189, 255) auto 5px;
-  outline: -webkit-focus-ring-color auto 5px;
+  height: 100vh;
+  padding: 8px;
+  background-color: #445435;
 }
 
 .ReactTags__selected {
@@ -32,11 +23,56 @@ body {
   position: relative;
 }
 
+.history::-webkit-scrollbar {
+  width: 1em;
+}
+
+.history::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.history::-webkit-scrollbar-thumb {
+  border: 1px solid;
+  border-top-color: #667359;
+  border-left-color: #667359;
+  background-color: #445435;
+  border-bottom-color: #1f2719;
+  border-right-color: #1f2719;
+}
+
+.history {
+  color: rgba(255, 255, 255, 0.75);
+  padding: 4px;
+  border: 1px solid;
+  border-bottom-color: #687360;
+  border-right-color: #687360;
+  border-top-color: #1f2719;
+  border-left-color: #1f2719;
+  background-color: #303f25;
+  margin-bottom: 8px;
+  flex-grow: 1;
+  overflow: auto;
+}
+
+.ReactTags__tags {
+  border: 1px solid;
+  border-bottom-color: #687360;
+  border-right-color: #687360;
+  border-top-color: #1f2719;
+  border-left-color: #1f2719;
+  background-color: #303f25;
+}
+
 .ReactTags__tag {
-  margin: 2px;
+  margin: 1px;
   padding: 2px;
-  background-color: #ddd;
-  border-radius: 4px;
+  border: 1px solid;
+  border-top-color: #667359;
+  border-left-color: #667359;
+  background-color: #445435;
+  border-bottom-color: #1f2719;
+  border-right-color: #1f2719;
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .ReactTags__remove {
@@ -54,6 +90,16 @@ body {
   flex-grow: 1;
   font-family: inherit;
   font-size: inherit;
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.ReactTags__tagInputField::placeholder,
+.ReactTags__tagInputField::-moz-placeholder,
+.ReactTags__tagInputField::-webkit-input-placeholder,
+.ReactTags__tagInputField:-ms-input-placeholder,
+.ReactTags__tagInputField::-ms-input-placeholder {
+  color: white;
 }
 
 .ReactTags__tagInputField:focus {
@@ -62,18 +108,45 @@ body {
 
 .ReactTags__suggestions {
   position: absolute;
-  top: 100%;
+  bottom: calc(100% + 1px);
   left: -1px;
+  max-height: 80vh;
+  overflow: auto;
+}
+
+.ReactTags__suggestions::-webkit-scrollbar {
+  width: 12px;
+}
+
+.ReactTags__suggestions::-webkit-scrollbar-track {
+  border-top-color: #1f2719;
+  border-left-color: #1f2719;
+  background-color: #303f25;
+  border-bottom-color: #687360;
+  border-right-color: #687360;
+}
+
+.ReactTags__suggestions::-webkit-scrollbar-thumb {
+  border: 1px solid;
+  border-top-color: #667359;
+  border-left-color: #667359;
+  background-color: #445435;
+  border-bottom-color: #1f2719;
+  border-right-color: #1f2719;
 }
 
 .ReactTags__suggestions > ul {
   margin: 0;
   padding: 0;
   list-style: none;
-  border: 1px solid black;
-  background-color: white;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
+  border: 1px solid;
+
+  border-top-color: #687360;
+  border-left-color: #687360;
+  border-bottom-color: #1f2719;
+  border-right-color: #1f2719;
+  background-color: #303f25;
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .ReactTags__suggestions > ul > li {
@@ -81,12 +154,30 @@ body {
 }
 
 .ReactTags__activeSuggestion {
-  background-color: rgb(65, 189, 255);
+  color: white;
+  background-color: #445435;
 }
 
 .play-sentence {
-  background-color: rgb(65, 189, 255);
+  margin-top: 8px;
+
+  border-top-color: #667359;
+  border-left-color: #667359;
+  background-color: #445435;
+  border-bottom-color: #1f2719;
+  border-right-color: #1f2719;
+  color: rgba(255, 255, 255, 0.75);
+
   padding: 4px;
   font-size: inherit;
   font-family: inherit;
+}
+
+mark {
+  background-color: #667359;
+}
+
+.title {
+  color: white;
+  margin-bottom: 8px;
 }

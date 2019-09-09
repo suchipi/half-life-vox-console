@@ -17,7 +17,7 @@ function syncUrlState(tags) {
 
 export default class App extends React.Component {
   state = {
-    isFocused: false,
+    history: [],
     tags: urlState.get().map((word) => ({
       id: word,
     })),
@@ -45,11 +45,15 @@ export default class App extends React.Component {
     vox.playWord(word);
 
     this.setState(
-      (state) => ({ tags: [...state.tags, tag] }),
+      (state) => ({
+        tags: [...state.tags, tag],
+        history: [...state.history, word],
+      }),
       () => {
         syncUrlState(this.state.tags);
         setTimeout(() => {
           this.input.focus();
+          this.history.scrollTop = Number.MAX_SAFE_INTEGER;
         });
       }
     );
@@ -72,14 +76,21 @@ export default class App extends React.Component {
   }
 
   render() {
-    const { tags, suggestions, isFocused } = this.state;
+    const { tags, suggestions, history } = this.state;
     return (
       <>
-        <div
-          className={["tag-input-wrapper", isFocused ? "focused" : null]
-            .filter(Boolean)
-            .join(" ")}
+        <div className="title">VOX Console</div>
+        <code
+          className="history"
+          ref={(el) => {
+            this.history = el;
+          }}
         >
+          {history.map((sentence, index) => (
+            <div key={index}>> {sentence}</div>
+          ))}
+        </code>
+        <div className="tag-input-wrapper">
           <ReactTags
             placeholder={tags.length === 0 ? "Make the VOX speak..." : ""}
             labelField="id"
@@ -91,14 +102,21 @@ export default class App extends React.Component {
             handleAddition={this.handleAddition}
             handleDrag={this.handleDrag}
             delimiters={delimiters}
-            handleInputFocus={() => this.setState({ isFocused: true })}
-            handleInputBlur={() => this.setState({ isFocused: false })}
           />
         </div>
         <button
           className="play-sentence"
           onClick={() => {
-            vox.playSentence(tags.map((tag) => tag.id));
+            const sentence = tags.map((tag) => tag.id);
+            vox.playSentence(sentence);
+            this.setState(
+              {
+                history: [...history, sentence.join(" ")],
+              },
+              () => {
+                this.history.scrollTop = Number.MAX_SAFE_INTEGER;
+              }
+            );
           }}
         >
           Play
