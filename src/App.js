@@ -79,7 +79,16 @@ export default class App extends React.Component {
     const { tags, suggestions, history } = this.state;
     return (
       <>
-        <div className="title">VOX Console</div>
+        <div className="title">
+          <span>VOX Console</span>
+          <a
+            href="https://github.com/suchipi/half-life-vox-console"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub
+          </a>
+        </div>
         <code
           className="history"
           ref={(el) => {
