@@ -626,11 +626,26 @@ function playWord(word) {
 
     audio.src = "/vox/" + sounds[word];
 
+    let duration = 1;
+    audio.oncanplay = () => {
+      duration = audio.duration;
+    };
+    audio.ondurationchange = () => {
+      duration = audio.duration;
+    };
+
+    audio.ontimeupdate = () => {
+      if (duration - audio.currentTime < 0.3) {
+        resolve();
+      }
+    };
+
     audio.onended = () => {
       document.body.removeChild(audio);
       resolve();
     };
     audio.onerror = (err) => {
+      document.body.removeChild(audio);
       console.error(err);
       resolve();
     };
