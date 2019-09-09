@@ -72,6 +72,7 @@ const sounds = {
   blocked: "blocked.wav",
   bloop: "bloop.wav",
   blue: "blue.wav",
+  boomer: "boomer.wav",
   bottom: "bottom.wav",
   bravo: "bravo.wav",
   breach: "breach.wav",
