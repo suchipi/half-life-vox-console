@@ -21,6 +21,7 @@ body {
   display: flex;
   align-items: center;
   position: relative;
+  flex-wrap: wrap;
 }
 
 .history::-webkit-scrollbar {
