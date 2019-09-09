@@ -19,7 +19,7 @@ export default class App extends React.Component {
   state = {
     history: [],
     tags: urlState.get().map((word) => ({
-      id: word,
+      id: word.toLowerCase(),
     })),
     suggestions: vox.words.map((word) => ({ id: word })),
   };
@@ -37,7 +37,7 @@ export default class App extends React.Component {
   };
 
   handleAddition = (tag) => {
-    const word = tag.id;
+    const word = tag.id.toLowerCase();
 
     if (!vox.words.includes(word)) {
       return;
