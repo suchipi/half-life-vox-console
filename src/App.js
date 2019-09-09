@@ -96,7 +96,24 @@ export default class App extends React.Component {
           }}
         >
           {history.map((sentence, index) => (
-            <div key={index}>> {sentence}</div>
+            <a
+              className="history-item"
+              key={index}
+              onClick={() => {
+                const sentenceArray = sentence.split(" ");
+                vox.playSentence(sentenceArray);
+                this.setState(
+                  {
+                    tags: sentenceArray.map((word) => ({ id: word })),
+                  },
+                  () => {
+                    syncUrlState(this.state.tags);
+                  }
+                );
+              }}
+            >
+              > {sentence}
+            </a>
           ))}
         </code>
         <div className="tag-input-wrapper">

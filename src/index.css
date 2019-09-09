@@ -187,8 +187,18 @@ mark {
 
 a {
   color: white;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 a:visited {
   color: white;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.history-item {
+  display: block;
 }
