@@ -100,7 +100,7 @@ export default class App extends React.Component {
               className="history-item"
               key={index}
               onClick={() => {
-                const sentenceArray = sentence.split(" ");
+                const sentenceArray = sentence.toLowerCase().split(" ");
                 vox.playSentence(sentenceArray);
                 this.setState(
                   {
