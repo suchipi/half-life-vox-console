@@ -96,6 +96,7 @@ export default class App extends React.Component {
           }}
         >
           {history.map((sentence, index) => (
+            /* eslint-disable-next-line jsx-a11y/anchor-is-valid */
             <a
               className="history-item"
               key={index}
