@@ -626,10 +626,16 @@ function playWord(word) {
 
     audio.src = "/vox/" + sounds[word];
 
-    audio.onended = () => {
-      document.body.removeChild(audio);
-      resolve();
+    audio.ontimeupdate = (ev) => {
+      if (audio.currentTime === audio.duration) {
+        audio.pause();
+        if (audio.parentNode != null) {
+          audio.parentNode.removeChild(audio);
+        }
+        resolve();
+      }
     };
+
     audio.onerror = (err) => {
       console.error(err);
       document.body.removeChild(audio);
@@ -643,7 +649,7 @@ function playWord(word) {
 const vox = {
   words: Object.keys(sounds),
   playWord(word) {
-    playWord(word);
+    return playWord(word);
   },
   async playSentence(words) {
     // False positive in eslint rule???
